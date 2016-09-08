@@ -20,6 +20,10 @@ https://kivy.org/docs/gettingstarted/installation.html.
 
 Install on windows can be tricky but it's possible. Installation on linux is much easier.
 
+There is however a quick install option for window that may work for you here.
+https://github.com/KeyWeeUsr/KivyInstaller Unzip to a folder and run the batch file and it "should"
+handle the install for you.
+
 For Quick Install on Android
 ----------------------------
 If you want to test any changes you make on an actual phone or andorid emulator 
