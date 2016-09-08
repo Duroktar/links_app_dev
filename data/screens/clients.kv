@@ -1,0 +1,254 @@
+# // Clients screen
+MainScreen:
+    name: 'Clients'
+    fullscreen: True
+
+
+    ScreenManager:
+        id: sm
+
+        Screen:
+            name: 'main_client_screen'
+
+            FloatLayout:        
+                id: fl
+
+                Spinner:
+                    id: 'clients'
+                    text: app.client_name
+                    values: app.client_list
+                    pos_hint: {'x': .0, 'y': .85}
+                    size_hint_y: None
+                    height: '48dp'
+                    on_text:
+                        app.set_active_client(self.text)
+
+
+                Label:
+                    text: "IP: %s" % app.client_ip
+                    pos_hint: {'x': .3, 'y': .6}
+                    size_hint: .4, .1
+
+                Label:
+                    text: "Port: %s" % app.client_port
+                    pos_hint: {'x': .3, 'y': .5}
+                    size_hint: .4, .1
+
+
+
+
+                Button:
+                    text: 'Add'
+                    pos_hint: {'x': .3, 'y': .2}
+                    size_hint: .4, .1
+                    on_release: 
+                        sm.transition.direction = 'left'
+                        sm.current = 'add_client'
+
+                Button:
+                    text: 'Edit'
+                    pos_hint: {'x': .3, 'y': .1}
+                    size_hint: .4, .1
+                    on_release: 
+                        sm.transition.direction = 'left'
+                        sm.current = 'edit_client'
+
+
+        Screen:
+            name: 'add_client'
+            on_pre_enter: self.canvas.ask_update()
+
+            FloatLayout:
+                orientation: 'tb-lr'
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .8}                
+                    text: 'Client Name'
+
+                TextInput
+                    id: add_client_name
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .8}
+
+                    multiline: False
+                    text: 'Ex: Upstairs Computer'
+                    focus: True
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .7}                
+                    text: 'IP Address'
+
+                TextInput
+                    id: client_ip
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .7}
+                    multiline: False
+                    text: 'localhost'
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .6}                
+                    text: 'Port'
+
+                TextInput:
+                    id: client_port
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .6}
+                    text: '54657'
+                    multiline: False
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .5}                
+                    text: 'Key'
+
+                TextInput:
+                    id: client_key
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .5}
+                    text: 'ABC1234'
+                    password: True
+                    multiline: False
+
+
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .3}
+                    width: 100
+                    text: 'Save'
+                    on_release:
+                        print "IMPORTANT, SHOULD HAVE CLIENT NAME"
+                        print add_client_name.text, client_ip.text, client_port.text, client_key.text
+                        app.save_client(add_client_name.text, ip=client_ip.text, port=client_port.text, linkskey=client_key.text, overwrite=True)
+                        sm.current = 'main_client_screen'
+                        # app.nav_to('Interact')
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .2}
+                    text: 'Cancel'
+                    on_release:
+                        sm.transition.direction = 'right'
+                        sm.current = 'main_client_screen'
+                        
+
+        Screen:
+            name: 'edit_client'
+            on_pre_enter: self.canvas.ask_update()
+            FloatLayout:
+                id: bl
+                orientation: 'tb-lr'
+                popup: popup.__self__
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .4, 'y': .8}                
+                    text: app.client_name
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .7}                
+                    text: 'IP Address'
+
+                TextInput
+                    id: edit_client_ip
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .7}
+                    multiline: False
+                    text: app.client_ip
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .6}                
+                    text: 'Port'
+
+                TextInput:
+                    id: edit_client_port
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .6}
+                    text: app.client_port
+                    multiline: False
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .5}                
+                    text: 'Key'
+
+                TextInput:
+                    id: edit_client_key
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .5}
+                    text: app.client_key
+                    password: True
+                    multiline: False
+
+
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .3}
+                    width: 100
+                    text: 'Save'
+                    on_release: 
+                        print app.client_name, edit_client_ip.text, edit_client_port.text, edit_client_key.text
+                        app.save_client(app.client_name, ip=edit_client_ip.text, port=edit_client_port.text, linkskey=edit_client_key.text, overwrite=True)
+                        sm.current = 'main_client_screen'
+                        # app.nav_to('Interact')
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .2}
+                    text: 'Cancel'
+                    
+                    on_release:
+                        sm.transition.direction = 'right'
+                        sm.current = 'main_client_screen'
+
+                Button:
+                    size_hint: .3, .08
+                    pos_hint: {'x': .35, 'y': .08}
+                    text: 'Delete'
+                    
+                    on_release: popup.open()
+
+
+                Popup:
+                    id: popup
+                    on_parent: if self.parent == bl: bl.remove_widget(self)
+                    size_hint: .6, .4
+                    auto_dismiss: False
+                    title: 'Delete client %s. Are you sure?' % app.client_name
+                    content: confirm_delete
+
+                    BoxLayout:
+                        id: confirm_delete
+                        orientation: 'horizontal'
+
+                        Button:
+                            text: 'Delete'
+                            on_press: 
+                                popup.dismiss()
+                                app.delete_client(app.client_name)
+                                sm.current = 'main_client_screen'
+
+                        Button:
+                            text: 'Cancel'
+                            on_press: popup.dismiss()                        

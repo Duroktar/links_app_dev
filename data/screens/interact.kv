@@ -1,0 +1,135 @@
+# // Interaction screen
+
+#:import Factory kivy.factory.Factory
+
+MainScreen:
+    name: 'Interact'
+    fullscreen: True
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: '96dp'
+
+        Spinner:
+            text: sm.current.capitalize()
+            values: ('Speak', 'Emulate Speech', 'Call Command')
+            on_text: sm.current = self.text
+
+        Spinner:
+            id: 'clients'
+            text: app.active_client.name
+            values: app.client_list
+            on_text:
+                app.set_active_client(self.text)
+
+
+    ScreenManager:
+        id: sm
+
+        Screen:
+            name: 'Speak'
+              
+            FloatLayout:
+                id: speak
+
+
+                Label:
+                    text: 'Make links speak'
+                    pos_hint: {'x': .4, 'y': .6}
+                    size_hint: .2, .1
+
+                TextInput
+                    id: speak_input
+                    pos_hint: {'x': .2, 'y': .5}
+                    size_hint: .6, .1
+                    text: 'Hello, my name is Jarvis.'
+                    focus: True
+
+                Button:
+                    text: 'Submit'
+                    pos_hint: {'x': .35, 'y': .4}
+                    size_hint: .3, .1
+                    on_release: print "Speak %s" % speak_input.text
+                    on_release: app.active_client.talk(speak_input.text)
+
+                Button:
+                    text: 'Edit clients'
+                    pos_hint: {'x': .35, 'y': .1}
+                    size_hint: .3, .1
+                    on_release:
+                        print "Going home"
+                        app.nav_to('Clients')
+                    
+
+
+        Screen:
+            name: 'Emulate Speech'
+
+            FloatLayout:
+                id: emulate
+
+
+                Label:
+                    text: 'Emulate Speech'
+                    pos_hint: {'x': .4, 'y': .6}
+                    size_hint: .2, .1
+
+                TextInput
+                    id: emulate_input
+                    pos_hint: {'x': .2, 'y': .5}
+                    size_hint: .6, .1
+                    height: '32dp'
+                    text: 'what time is it'
+
+                Button:
+                    pos_hint: {'x': .35, 'y': .4}
+                    size_hint: .3, .1
+                    height: '48dp'
+                    text: 'Submit'
+                    on_release: print "Emulate %s" % emulate_input.text
+                    on_release: app.active_client.emulate_speech(emulate_input.text)
+
+                Button:
+                    text: 'Edit clients'
+                    pos_hint: {'x': .35, 'y': .1}
+                    size_hint: .3, .1
+                    on_release:
+                        print "Going home"
+                        app.nav_to('Clients')
+
+
+        Screen:
+            name: 'Call Command'
+
+            FloatLayout:
+                id: command
+
+
+                Label:
+                    text: 'Call Command'
+                    pos_hint: {'x': .4, 'y': .6}
+                    size_hint: .2, .1
+
+                TextInput:
+                    id: command_input
+                    pos_hint: {'x': .2, 'y': .5}
+                    size_hint: .6, .1
+                    height: '32dp'
+                    text: 'stop talking'
+
+                Button:
+                    pos_hint: {'x': .35, 'y': .4}
+                    size_hint: .3, .1
+                    height: '48dp'
+                    text: 'Submit'
+                    on_release: print "Command %s" % command_input.text
+                    on_release: app.active_client.CallCommand(command_input.text)
+
+                Button:
+                    text: 'Edit clients'
+                    pos_hint: {'x': .35, 'y': .1}
+                    size_hint: .3, .1
+                    on_release:
+                        print "Going home"
+                        app.nav_to('Clients')

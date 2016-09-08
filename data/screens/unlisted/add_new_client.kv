@@ -1,0 +1,83 @@
+# // New Client Screen
+
+MainScreen:
+    name: 'add_new_client'
+            FloatLayout:
+                orientation: 'tb-lr'
+
+    Label:
+        size_hint: .2, .07
+        pos_hint: {'x': .05, 'y': .8}                
+        text: 'Client Name'
+
+    TextInput
+        id: client_name
+        size_hint: .4, .07
+        pos_hint: {'x': .3, 'y': .8}
+
+        multiline: False
+        text: 'Ex: Upstairs Computer'
+        focus: True
+
+
+
+    Label:
+        size_hint: .2, .07
+        pos_hint: {'x': .05, 'y': .7}                
+        text: 'IP Address'
+
+    TextInput
+        id: client_ip
+        size_hint: .4, .07
+        pos_hint: {'x': .3, 'y': .7}
+        multiline: False
+        text: 'localhost'
+
+
+
+    Label:
+        size_hint: .2, .07
+        pos_hint: {'x': .05, 'y': .6}                
+        text: 'Port'
+
+    TextInput:
+        id: client_port
+        size_hint: .4, .07
+        pos_hint: {'x': .3, 'y': .6}
+        text: '54657'
+        multiline: False
+
+
+
+    Label:
+        size_hint: .2, .07
+        pos_hint: {'x': .05, 'y': .5}                
+        text: 'Key'
+
+    TextInput:
+        id: client_key
+        size_hint: .4, .07
+        pos_hint: {'x': .3, 'y': .5}
+        text: 'ABC1234'
+        password: True
+        multiline: False
+
+
+
+    Button:
+        size_hint: .3, .1
+        pos_hint: {'x': .35, 'y': .3}
+        width: 100
+        text: 'Save'
+        on_release:
+            print client_name.text, client_ip.text, client_port.text, client_key.text
+            app.save_client(client_name.text, ip=client_ip.text, port=client_port.text, linkskey=client_key.text, overwrite=True)
+            app.go_previous_screen()
+
+    Button:
+        size_hint: .3, .1
+        pos_hint: {'x': .35, 'y': .2}
+        text: 'Cancel'
+        on_release:
+            app.go_previous_screen()
+            

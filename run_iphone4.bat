@@ -1,0 +1,1 @@
+python main.py -m screen:iphone4,portrait

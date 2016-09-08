@@ -1,0 +1,230 @@
+# // Popup container in kivy cataloue is the key to all this
+
+<MainScreen>:
+    name: 'Clients'
+    fullscreen: True
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+
+        Spinner:
+            id: 'clients'
+            text: app.active_client.name
+            values: app.client_list
+            size_hint_y: None
+            height: '48dp'
+            on_text: app.set_active_client(self.text.lower())
+
+
+    ScreenManager:
+        id: sm
+
+        Screen:
+            name: 'main_client_screen'
+
+            FloatLayout:        
+                id: fl
+
+
+
+                Label:
+                    text: "IP: %s" % app.active_client.ip
+                    pos_hint: {'x': .3, 'y': .9}
+                    size_hint: .4, .1
+
+                Label:
+                    text: "Port: %s" % app.active_client.port
+                    pos_hint: {'x': .3, 'y': .8}
+                    size_hint: .4, .1
+
+                Label:
+                    text:"Key: %s" %  app.active_client.key
+                    pos_hint: {'x': .3, 'y': .7}
+                    size_hint: .4, .1                                        
+
+
+
+                Button:
+                    text: 'Add'
+                    pos_hint: {'x': .3, 'y': .3}
+                    size_hint: .4, .1
+                    on_release: sm.current = 'add_client'
+
+                Button:
+                    text: 'Edit'
+                    pos_hint: {'x': .3, 'y': .2}
+                    size_hint: .4, .1
+                    on_release: sm.current = 'edit_client'
+
+
+        Screen:
+            name: 'add_client'
+
+            FloatLayout:
+                orientation: 'tb-lr'
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .8}                
+                    text: 'Client Name'
+
+                TextInput
+                    id: client_name
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .8}
+
+                    multiline: False
+                    text: 'Ex: Upstairs Computer'
+                    focus: True
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .7}                
+                    text: 'IP Address'
+
+                TextInput
+                    id: client_ip
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .7}
+                    multiline: False
+                    text: 'localhost'
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .6}                
+                    text: 'Port'
+
+                TextInput:
+                    id: client_port
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .6}
+                    text: '54657'
+                    multiline: False
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .5}                
+                    text: 'Key'
+
+                TextInput:
+                    id: client_key
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .5}
+                    text: 'ABC1234'
+                    password: True
+                    multiline: False
+
+
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .3}
+                    width: 100
+                    text: 'Save'
+                    on_release:
+                        sm.transition.direction = 'right'
+                        print client_name.text, client_ip.text, client_port.text, client_key.text
+                        app.save_client(client_name.text, ip=client_ip.text, port=client_port.text, linkskey=client_key.text, overwrite=True); sm.current = 'main_client_screen'
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .2}
+                    text: 'Cancel'
+                    on_release:
+                        sm.transition.direction = 'right'
+                        sm.current = 'main_client_screen'
+                        
+
+        Screen:
+            name: 'edit_client'
+
+            FloatLayout:
+                orientation: 'tb-lr'
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .8}                
+                    text: 'Client Name'
+
+                TextInput
+                    id: client_name
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .8}
+
+                    multiline: False
+                    text: app.active_client.name
+                    focus: True
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .7}                
+                    text: 'IP Address'
+
+                TextInput
+                    id: client_ip
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .7}
+                    multiline: False
+                    text: app.active_client.ip
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .6}                
+                    text: 'Port'
+
+                TextInput:
+                    id: client_port
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .6}
+                    text: app.active_client.port
+                    multiline: False
+
+
+
+                Label:
+                    size_hint: .2, .07
+                    pos_hint: {'x': .05, 'y': .5}                
+                    text: 'Key'
+
+                TextInput:
+                    id: client_key
+                    size_hint: .4, .07
+                    pos_hint: {'x': .3, 'y': .5}
+                    text: app.active_client.key
+                    password: True
+                    multiline: False
+
+
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .3}
+                    width: 100
+                    text: 'Save'
+                    on_release: 
+                        sm.transition.direction = 'right'
+                        print client_name.text, client_ip.text, client_port.text, client_key.text
+                        app.save_client(client_name.text, ip=client_ip.text, port=client_port.text, linkskey=client_key.text, overwrite=True); sm.current = 'main_client_screen'
+
+                Button:
+                    size_hint: .3, .1
+                    pos_hint: {'x': .35, 'y': .2}
+                    text: 'Cancel'
+                    
+                    on_release:
+                        sm.transition.direction = 'right'
+                        sm.current = 'main_client_screen'

@@ -1,0 +1,1 @@
+python -i main.py -m screen:iphone5,portrait,scale=.75

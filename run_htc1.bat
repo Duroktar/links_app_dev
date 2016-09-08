@@ -1,0 +1,1 @@
+python main.py -m screen:one,portrait,scale=.75
