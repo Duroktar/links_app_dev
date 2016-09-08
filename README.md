@@ -28,6 +28,18 @@ without having to build an apk file.
 Get the Kivy Launcher app from the Play Store or from http://apk-dl.com/en/kivy-launcher. 
 Once installed place all the files into /storage/Kivy/Links/ and you'll be able to start the app on your device.
 
+Running App from Python
+-----------------------
+This is how you'll be running the app most of the time during development. 
+
+Either double clicking the main.py file directly. 
+
+Or from the command line
+- python main.py
+
+**I have included batch files with common device screen setups which can be run to simulate a 
+variety of user scenarios. This is the recommended way of running the app in Python.**
+
 Quick Info
 ----------
 Kivy allows us to completely seperate the design from the functionality
