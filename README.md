@@ -13,27 +13,21 @@ using the cross-platform Kivy Library https://kivy.org/#home.
 which can be compiled into the appropriate file type for various
 machine architectures. 
 
-For windows or linux Install
-----------------------------
+Kivy Development Setup For Windows or Linux 
+-------------------------------------------
+
 Kivy installation instructions can be found here
 https://kivy.org/docs/gettingstarted/installation.html.
 
-Install on windows can be tricky but it's possible. Installation on linux is much easier.
+Kivy nstall on windows can be tricky but it's possible. Installation on linux is much easier.
 
 There is however a quick install option for window that may work for you here.
 https://github.com/KeyWeeUsr/KivyInstaller Unzip to a folder and run the batch file and it "should"
 handle the install for you.
 
-For Quick Install on Android
-----------------------------
-If you want to test any changes you make on an actual phone or andorid emulator 
-without having to build an apk file. 
-
-Get the Kivy Launcher app from the Play Store or from http://apk-dl.com/en/kivy-launcher. 
-Once installed place all the files into /storage/Kivy/Links/ and you'll be able to start the app on your device.
-
 Running App from Python
 -----------------------
+
 This is how you'll be running the app most of the time during development. 
 
 Either double clicking the main.py file directly. 
@@ -44,8 +38,32 @@ Or from the command line
 **I have included batch files with common device screen setups which can be run to simulate a 
 variety of user scenarios. This is the recommended way of running the app in Python.**
 
+Windows Executable
+------------------
+
+**A compiled Windows Executable for demo purposes is available from here https://drive.google.com/open?id=0BxC7Vg_reMwndk8tUWpqQ2lfdms
+.** Just extract file to a folder and run.
+
+If you just want to try out the Alpha Release then this is probably the link for you. It's BY FAR the easiest way to
+run the App.
+
+*Made with Pyinstaller*
+
+For Easy Install on Android with Kivy Launcher
+----------------------------------------------
+
+If you want to test any changes you make on an actual phone or andorid emulator 
+without having to build an apk file. 
+
+Get the Kivy Launcher app from the Play Store or from http://apk-dl.com/en/kivy-launcher. 
+Once installed place all the files into /storage/Kivy/Links/ and you'll be able to start the app on your device.
+
+*Note that Kivy Launcher is for testing and app demo purposes only. Our final product will be compiled to the appropriate
+package files (ie: apk, rpm, ios...)*
+
 Quick Info
 ----------
+
 Kivy allows us to completely seperate the design from the functionality
 of the app by way of the extremely easy to use .kv language files.
 Therefore if you wish to help but aren't particularly comfortable
@@ -56,8 +74,9 @@ It's alot like css so if your familiar with css, than you can help with themes o
 
 See https://kivy.org/docs/api-kivy.lang.html for more info on the kv language.
 
-Dev
----
+Development
+-----------
+
 **Custom created .kv files will be autoloaded for use when placed into the ./data/screens/ directory.**
 All modules are loaded this way (Including this About file, see ./screens/about.kv)
 
@@ -67,6 +86,7 @@ Kivy also allows for dynamic access to java or android modules with the Pyjnius 
 
 Builds
 ------
+
 This is an incredibly difficult process. If you are ready for the challenge you can check out
 the link below. 
 
@@ -93,6 +113,7 @@ an offical public release is ever made.
 
 Summary
 -------
+
 Please do any error reporting or requests, etc. in the issues tab of
 the Github and please try to be helpful and respectful to everyone involved.
 
@@ -113,4 +134,5 @@ respond as quickly as possible
 
 Author
 ------
+
 Created by: traBpUkciP
