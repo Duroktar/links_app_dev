@@ -95,6 +95,8 @@ The best way to compile is to get the provided Virtual Machine image with
 more info.
 - (See "Buildozer" https://github.com/kivy/buildozer **ADVANCED USERS ONLY**)
 
+More packaging info can be found here https://kivy.org/docs/guide/packaging.html
+
 ToDo
 ----
 - ***Voice support still needs to be added.*** (See https://github.com/cidermole/audiostream)
